@@ -48,10 +48,6 @@ function Sidebar() {
 
                 <hr className="sidebar-divider" />
 
-                <div className="sidebar-heading">
-                    Addons
-                </div>
-
                 {/* <!-- Nav Item - Charts --> */}
                 <li className="nav-item">
                     <a className="nav-link" href="/add-agent">
@@ -59,27 +55,27 @@ function Sidebar() {
                         <span>Add Agent     </span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="charts.html">
+                    <a className="nav-link" href="/add-user">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Add User     </span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="charts.html">
+                    <a className="nav-link" href="/add-points">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Add Points    </span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="charts.html">
+                    <a className="nav-link" href="/remove-points">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Remove Points     </span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="charts.html">
+                    <a className="nav-link" href="/delete-user">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Delete User    </span></a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="charts.html">
+                    <a className="nav-link" href="delete-agent">
                         <i className="fas fa-fw fa-chart-area"></i>
                         <span>Delete Agent    </span></a>
                 </li>
