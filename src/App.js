@@ -5,14 +5,19 @@ import LoginPage from "./components/login/LoginPage";
 import Dashboard from "./components/dashboard/Dashboard";
 import Dashboards from "./Dashboards";
 import OtpVarification from "./components/login/OtpVarification";
-import AddAgent from "./components/addAgent/AddAgent";
-import AddUser from "./components/addUser/AddUser";
-import AddPoints from "./components/addPoints/AddPoints";
-import RemovePoints from "./components/removePoints/RemovePoints";
-import DeleteUser from "./components/deleteUser/DeleteUser";
-import DeleteAgent from "./components/deleteAgent/DeleteAgent";
-
-
+import AddAdminAgent from "./components/AdminAgent/AddAdminAgent";
+import AllAdminAgent from "./components/AdminAgent/AllAdminAgent";
+import AllUser from "./components/User/AllUser";
+import UserDetails from './components/User/UserDetails';
+import AdminAgentDetails from "./components/AdminAgent/AdminAgentDetails";
+import AddAgent from "./components/Agent/AddAgent";
+import AllAgent from "./components/Agent/AllAgent";
+import AgentDetails from "./components/Agent/AgentDetails";
+import AddBankDetail from "./components/AdminBank/AddBankDetail";
+import AllBankDetail from "./components/AdminBank/AllBankDetail";
+import AddBalance from "./components/User/AddBalance";
+import ReduceBalance from "./components/User/ReduceBalance";
+import BankDetail from "./components/AdminBank/BankDetail";
 
 function App() {
   return (
@@ -22,12 +27,19 @@ function App() {
         <Route index element={<LoginPage />} />
         <Route path="otp" element={<OtpVarification />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="all-user" element={<AllUser/>} />
+        <Route path="add-balance" element={<AddBalance/>} />
+        <Route path="reduce-balance" element={<ReduceBalance/>} />
+        <Route path="/user-details/:userName" element={<UserDetails />} />
+        <Route path="add-admin-agent" element={<AddAdminAgent />} />
+        <Route path="all-admin-agent" element={<AllAdminAgent />} />
+        <Route path="admin-agent-details/:userName" element={<AdminAgentDetails />} />
         <Route path="add-agent" element={<AddAgent />} />
-        <Route path="add-user" element={<AddUser/>} />
-        <Route path="add-points" element={<AddPoints/>} />
-        <Route path="remove-points" element={<RemovePoints/>} />
-        <Route path="delete-user" element={<DeleteUser/>} />
-        <Route path="delete-agent" element={<DeleteAgent/>} />
+        <Route path="all-agent" element={<AllAgent />} />
+        <Route path="/agent-details/:userName" element={<AgentDetails />} />
+        <Route path="/admin-bank-details" element={<AddBankDetail />} />
+        <Route path="/admin-bank-details/:bankAccountNumber" element={<BankDetail />} />
+        <Route path="/admin-all-bank-details" element={<AllBankDetail />} />
         <Route path="demo" element={<Dashboards />} />
       </Routes>
     </BrowserRouter>

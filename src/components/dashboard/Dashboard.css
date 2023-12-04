@@ -39,9 +39,16 @@
     display: block;
 }
 
+.formobile{
+    font-size: 35px;
+}
+
 
 @media (max-width: 450px) {
     .hide-for-small-screen{
         display: none;
+    }
+    .formobile{
+        font-size: 20px;
     }
   }

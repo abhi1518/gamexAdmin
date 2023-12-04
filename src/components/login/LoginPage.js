@@ -1,78 +1,89 @@
-import React from 'react'
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import "./login.css";
-// import { registerLogin } from '../../api';
-import { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import authLayout from "../../hoc/authLayout";
-
+import { loginUser } from '../../api';
 
 function LoginPage() {
-    // const navigate = useNavigate();
-    const [password, setPassword] = useState('');
-    const [email, setEmail] = useState('');
-    const [inCorrect, setIncorreact] = useState(false);
+  const [userName, setUserName] = useState('');
+  const [password, setPassword] = useState('');
+  const [userNameError, setUserNameError] = useState('');
+  const [passwordError, setPasswordError] = useState('');
+  const [inCorrect, setIncorreact] = useState(false);
+  const navigateToOtherPage = () => {
+    // Username validation
+    if (!userName) {
+      setUserNameError('User Name is required');
+      return;
+    }
+    // Password validation
+    if (!password) {
+      setPasswordError('Password is required');
+      return;
+    }
+    handleLogin();
+  };
 
-    const [status, setStatus] = useState('');
-    const navigateToOtherPage = () => {
-      // Use the history object to navigate to the other page
-      // history.push('/');
-      window.location.href = '/otp';
-    };
-  
-    const handleSubmit = async (event) => {
-      event.preventDefault(); // Prevent the default form submission behavior
-  
-    //   try {
-    //     const formData = new FormData();
-    //     formData.append('email', email);
-    //     formData.append('password', password );
-  
-    //     const result = await registerLogin(formData);
-    //     console.log(result);
-    //     if(result.status){
-    //       window.location.href = '/landing-page';
-    //       // navigate = '/landing-page';
-    //     }else {
-    //       setIncorreact(true);
-    //       console.log(inCorrect);
-    //     }
-    //     setStatus(result);
-    //   } catch (error) {
-    //     setIncorreact(true);
-    //     console.log(inCorrect);
-    //     console.error('Error registering user:', error);
-    //     setStatus('Error registering user.');
-    //   }
-    };
+  const handleLogin = async () => {
+    try {
+      const response = await loginUser(userName, password);
+      window.location.href = '/dashboard';
+      // Handle the response here, e.g., redirect to another page
+      console.log(response);
+
+    } catch (error) {
+      setIncorreact(true);
+      console.error('Error during login:', error.message);
+    }
+  };
+
   return (
     <div>
-        <form className="login-form" onSubmit={handleSubmit}>
-                <div className="d-flex align-items-center my-4">
-                    <h1 className="text-center fw-normal mb-0 me-3">Log In</h1>
-                </div>
-                {/* <!-- Email input --> */}
-                <div className="form-outline mb-4">
-                    <label className="form-label" htmlFor="form3Example3">Phone No.</label>
-                    <input type="number" id="form3Example3" className="form-control form-control-lg"
-                    placeholder="Enter a valid phone no." value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
+      <form className="login-form" onSubmit={(e) => e.preventDefault()}>
+        <div className="d-flex align-items-center my-4">
+          <h1 className="text-center fw-normal mb-0 me-3">Log In</h1>
+        </div>
 
-                {/* <!-- Password input --> */}
-               
+        {/* User Name input */}
+        <div className="form-outline mb-4">
+          <label className="form-label" htmlFor="form3Example3">User Name</label>
+          <input
+            type="text"
+            id="form3Example3"
+            className={`form-control form-control-lg ${userNameError ? 'is-invalid' : ''}`}
+            placeholder="Enter a valid user name"
+            value={userName}
+            onChange={(e) => {
+              setUserName(e.target.value);
+              setUserNameError('');
+            }}
+          />
+          {userNameError && <div className="invalid-feedback">{userNameError}</div>}
+        </div>
 
-                <div className="d-flex justify-content-between align-items-center">
-                   
-                </div>
-
-                <div className="text-center text-lg-start mt-4 pt-2">
-                {/* <button type="submit" className="btn btn-primary btn-lg">Proceed</button> */}
-                <button onClick={navigateToOtherPage} className="btn btn-primary btn-lg">Proceed</button>
-
-                </div>
-            </form>
+        {/* Password input */}
+        <div className="form-outline mb-4">
+          <label className="form-label" htmlFor="form3Example3">Password</label>
+          <input
+            type="password"
+            id="form3Example3"
+            className={`form-control form-control-lg ${passwordError ? 'is-invalid' : ''}`}
+            placeholder="Enter a valid password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+              setPasswordError('');
+            }}
+          />
+          {passwordError && <div className="invalid-feedback">{passwordError}</div>}
+        </div>
+        {inCorrect == true ? <><p style={{ color: "red" }}>Email or Password not match</p></> : <></>}
+        <div className="text-center text-lg-start mt-4 pt-2">
+          <button onClick={navigateToOtherPage} className="btn btn-primary btn-lg">Proceed</button>
+        </div>
+      </form>
     </div>
-  )
+  );
 }
 
 export default authLayout(LoginPage);
